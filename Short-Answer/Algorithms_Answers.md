@@ -2,13 +2,13 @@
 
 ## Exercise I
 
-a)
+a) Runtime => O(n). This is because there will be a strictly linear increase of operations as the input increases.
 
 
-b)
+b) Runtime => O(n log n). This is because the loop variable 'i' deals with O(n) time, and the 'j'  doubles with every pass/run through the loops. 
 
 
-c)
+c) Runtime => O(n). Much like the first one, this recursion will increase linearly with n, the input.
 
 ## Exercise II
 

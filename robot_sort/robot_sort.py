@@ -97,36 +97,32 @@ class SortingRobot:
         Sort the robot's list.
         """
         
-        if not self.can_move_left() and not self.can_move_right():
-            return
-
+        
         self.set_light_on()
 
-        while self.light_is_on:
-
-            # grabbing the first item
-            self.swap_item()
+        while self.light_is_on():
 
             # if we can move right, we should go right and swap out our current/bigger object
             while self.can_move_right():
-                self.move_right()
-                if self.compare_item() == 1:
+                
+                if self.compare_item() == -1 or self.compare_item() == None:
                     self.swap_item()
 
+                self.move_right()
             # checks to see if we're still looking at an item
-            while self.compare_item is not None:
+            if self.compare_item() == None:
                 # go backwards to the spot we swapped our initial item
+                self.set_light_off()
+                break
+
+
+            while self.can_move_left() and self.compare_item() is not None:
+                if self.compare_item() == 1:
+                    self.swap_item()
                 self.move_left()
 
-
-            # change out our current item with 'non' and pick up the original item
-            self.swap_item()
-
-            # keep checking if we can move right
-            if self.can_move_right():
-                self.move_right()
-            else: # we've reached the end, turn off the light
-                self.set_light_off()
+        return self._time
+            
         
 
 

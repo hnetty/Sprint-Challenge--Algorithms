@@ -96,8 +96,43 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        if not self.can_move_left() and not self.can_move_right():
+            return
+
+        self.set_light_on()
+
+        while self.light_is_on:
+
+            # grabbing the first item
+            self.swap_item()
+
+            # if we can move right, we should go right and swap out our current/bigger object
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+
+            # checks to see if we're still looking at an item
+            while self.compare_item is not None:
+                # go backwards to the spot we swapped our initial item
+                self.move_left()
+
+
+            # change out our current item with 'non' and pick up the original item
+            self.swap_item()
+
+            # keep checking if we can move right
+            if self.can_move_right():
+                self.move_right()
+            else: # we've reached the end, turn off the light
+                self.set_light_off()
+        
+
+
+
+
+        
 
 
 if __name__ == "__main__":
